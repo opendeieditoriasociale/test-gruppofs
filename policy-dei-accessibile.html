@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Policy DEI – Gruppo FS Italiane (versione accessibile)</title>
+  <style>
+
+/* ============================================================
+   RESET E BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bg:           #f8f6f1;
+  --text:         #111111;
+  --text-muted:   #3a3a3a;
+  --h1-color:     #f0f6ff;
+  --h2-color:     #1a3a5c;
+  --h3-color:     #1a5480;
+  --nav-bg:       #ddeeff;
+  --nav-border:   #1a5480;
+  --nav-active-bg:#1a5480;
+  --nav-active-fg:#ffffff;
+  --link:         #1a5480;
+  --focus:        #c45000;
+  --box-info-bg:  #e0efff;
+  --box-info-bd:  #0047a0;
+  --box-info-lbl: #00378a;
+  --box-check-bg: #dff2e6;
+  --box-check-bd: #1a5e21;
+  --box-check-lbl:#124918;
+  --box-warn-bg:  #fef3cc;
+  --box-warn-bd:  #7a3b00;
+  --box-warn-lbl: #5e2d00;
+  --box-step-bg:  #e8eafc;
+  --box-step-bd:  #2530a0;
+  --box-step-lbl: #1a2488;
+  --box-def-bg:   #f0e6ff;
+  --box-def-bd:   #5e1490;
+  --box-def-lbl:  #4a0f7c;
+  --box-quote-bg: #e0efff;
+  --box-quote-bd: #1a3a5c;
+  --gloss-bg:     #ffffff;
+  --gloss-bd:     #b0c4d8;
+  --sep:          #c8d8e8;
+  --font: "Atkinson Hyperlegible", Verdana, "Trebuchet MS", system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.2rem;
+  line-height: 1.75;
+  letter-spacing: 0.04em;
+  word-spacing: 0.12em;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+img, video, svg { max-width: 100%; height: auto; display: block; }
+
+/* SKIP LINK */
+.skip-link {
+  position: absolute; top: -50px; left: 0;
+  background: var(--link); color: #fff;
+  padding: 10px 18px; z-index: 10000;
+  font-weight: 700; font-size: 1rem;
+  text-decoration: none; border-radius: 0 0 6px 0;
+}
+.skip-link:focus { top: 0; }
+
+/* PAGE LAYOUT */
+.page-layout {
+  display: flex;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* NAVSCROLL */
+#navscroll {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  width: 230px;
+  min-width: 210px;
+  max-height: 100vh;
+  overflow-y: auto;
+  background: var(--nav-bg);
+  border-right: 4px solid var(--nav-border);
+  padding: 1.5rem 1rem 2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.nav-titolo {
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--h3-color);
+  margin: 0 0 0.8em;
+  padding-bottom: 0.4em;
+  border-bottom: 2px solid var(--nav-border);
+}
+#navscroll ul { list-style: none; margin: 0; padding: 0; }
+#navscroll li { margin-bottom: 0.15em; }
+.nav-item {
+  display: block;
+  padding: 0.4em 0.6em;
+  border-radius: 4px;
+  color: var(--h2-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.12s ease;
+}
+.nav-item:hover { background: rgba(26,84,128,0.14); }
+.nav-item[aria-current="true"] {
+  background: var(--nav-active-bg);
+  color: var(--nav-active-fg);
+  font-weight: 700;
+}
+.nav-item:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+/* MAIN */
+.page-layout > main {
+  flex: 1;
+  min-width: 0;
+  max-width: 72ch;
+  padding: 2rem 2.5rem 5rem;
+}
+
+/* HEADER */
+.doc-header {
+  background: linear-gradient(135deg, #112240 0%, #1e3f6e 100%);
+  color: var(--h1-color);
+  padding: 2.2rem 2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+.doc-header h1 {
+  color: var(--h1-color);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.4em;
+}
+.doc-subtitle { font-size: 1.05rem; opacity: 0.88; margin: 0; word-spacing: normal; }
+.doc-meta { font-size: 0.85rem; opacity: 0.65; margin-top: 0.9em; letter-spacing: 0.02em; }
+
+/* NOTA LETTURA */
+.nota-lettura {
+  background: var(--box-info-bg);
+  border: 2px solid var(--box-info-bd);
+  border-radius: 8px;
+  padding: 0.9em 1.3em;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+.nota-lettura p { margin: 0; }
+.nota-lettura p + p { margin-top: 0.5em; }
+
+/* TIPOGRAFIA */
+h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: var(--h2-color);
+  line-height: 1.25;
+  margin: 0 0 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 3px solid var(--nav-border);
+}
+h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 700;
+  color: var(--h3-color);
+  line-height: 1.3;
+  margin: 2rem 0 0.5em;
+}
+p { margin: 0 0 1.6em; }
+p:last-child { margin-bottom: 0; }
+ul, ol { margin: 0 0 1.1em; padding-left: 1.5em; }
+li { margin-bottom: 0.55em; line-height: 1.65; }
+strong { color: var(--h2-color); font-weight: 700; }
+a { color: var(--link); }
+hr.sez-sep {
+  border: none;
+  border-top: 2px solid var(--sep);
+  margin: 3rem 0 2rem;
+}
+
+/* TOOLTIP TRIGGER */
+.n {
+  border-bottom: 2px dotted var(--link);
+  cursor: help;
+  color: inherit;
+  padding-block: 0.12em;
+  display: inline-block;
+}
+.n:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
+.n-demo { border-bottom: 2px dotted var(--link); }
+@media (pointer: coarse) {
+  .n { padding-block: 0.3em; padding-inline: 0.08em; }
+}
+
+/* TOOLTIP */
+#tt {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  max-width: min(380px, calc(100vw - 24px));
+  padding: 14px 18px;
+  background: #112240;
+  color: #f0f6ff;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  word-spacing: 0.10em;
+  hyphens: none;
+  box-shadow: 0 8px 28px rgba(0,0,0,.4);
+  pointer-events: auto;
+}
+#tt-term {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #a8d0f0;
+}
+#tt-body p { margin: 0 0 0.5em; }
+#tt-body p:last-child { margin-bottom: 0; }
+
+/* BOX LABEL */
+.box-label {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.25em 0.8em;
+  border-radius: 4px;
+  margin-bottom: 0.7em;
+}
+
+/* BOX BASE */
+.box-spiegazione,
+.box-esempio,
+.box-checklist,
+.box-attenzione,
+.box-processo,
+.box-definizione,
+.box-citazione {
+  border-left: 5px solid;
+  border-radius: 0 8px 8px 0;
+  padding: 1em 1.3em;
+  color: #111111;
+}
+/* forza testo nero nei box: annulla l'ereditarietà di strong e h3 colorati */
+.box-spiegazione strong, .box-esempio strong, .box-checklist strong,
+.box-attenzione strong, .box-processo strong, .box-definizione strong {
+  color: #111111;
+}
+.box-spiegazione h3, .box-esempio h3, .box-checklist h3,
+.box-attenzione h3, .box-processo h3, .box-definizione h3 {
+  color: #111111;
+}
+
+/* SPIEGAZIONE */
+.box-spiegazione { background: var(--box-info-bg); border-color: var(--box-info-bd); }
+.box-spiegazione .box-label { background: var(--box-info-lbl); color: #fff; }
+
+/* ESEMPIO */
+.box-esempio { background: var(--box-check-bg); border-color: var(--box-check-bd); }
+.box-esempio .box-label { background: var(--box-check-lbl); color: #fff; }
+
+/* CHECKLIST */
+.box-checklist { background: var(--box-check-bg); border-color: var(--box-check-bd); }
+.box-checklist .box-label { background: var(--box-check-lbl); color: #fff; }
+.box-checklist-lista { list-style: none; margin: 0; padding: 0; }
+.box-checklist-lista li {
+  padding: 0.5em 0.7em 0.5em 2.4em;
+  position: relative;
+  margin-bottom: 0.45em;
+  background: rgba(255,255,255,0.75);
+  border-radius: 4px;
+  line-height: 1.55;
+  color: #111111;
+}
+.box-checklist-lista li::before {
+  content: "\2014";
+  position: absolute;
+  left: 0.7em;
+  font-weight: 700;
+  color: var(--box-check-bd);
+}
+
+/* ATTENZIONE */
+.box-attenzione { background: var(--box-warn-bg); border-color: var(--box-warn-bd); }
+.box-attenzione .box-label { background: var(--box-warn-lbl); color: #fff; }
+
+/* PROCESSO */
+.box-processo { background: var(--box-step-bg); border-color: var(--box-step-bd); }
+.box-processo .box-label { background: var(--box-step-lbl); color: #fff; }
+.box-processo-lista { margin: 0.4em 0 0; padding-left: 1.5em; }
+.box-processo-lista li { margin-bottom: 0.55em; line-height: 1.6; }
+
+/* DEFINIZIONE */
+.box-definizione { background: var(--box-def-bg); border-color: var(--box-def-bd); }
+.box-definizione .box-label { background: var(--box-def-lbl); color: #fff; }
+.box-def-termine {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 0.4em;
+}
+
+/* CITAZIONE */
+.box-citazione {
+  background: var(--box-quote-bg);
+  border-left: 6px solid var(--box-quote-bd);
+  border-radius: 0 8px 8px 0;
+  padding: 1em 1.5em;
+}
+.box-citazione blockquote {
+  margin: 0;
+  font-size: 1.2em;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--h2-color);
+}
+.box-citazione footer {
+  margin-top: 0.6em;
+  font-size: 0.9em;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+/* SCHEMA GRIGLIA */
+.box-schema {
+  background: #edf2f7;
+  border: 2px solid var(--nav-border);
+  border-radius: 10px;
+  padding: 1.3em;
+  overflow-x: auto;
+}
+.box-schema figcaption {
+  margin-top: 0.8em;
+  font-size: 0.88em;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+}
+.schema-griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1em;
+  margin-bottom: 0.3em;
+}
+.schema-card {
+  background: #fff;
+  border: 2px solid var(--nav-border);
+  border-radius: 8px;
+  padding: 1em 0.8em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3em;
+}
+.schema-card-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1em;
+  height: 2.1em;
+  border-radius: 50%;
+  background: var(--h2-color);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.schema-card-titolo {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--h2-color);
+  line-height: 1.3;
+}
+.schema-card-desc {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  line-height: 1.4;
+  word-spacing: normal;
+  margin: 0;
+}
+
+/* GLOSSARIO */
+.glossario-item {
+  background: var(--gloss-bg);
+  border: 2px solid var(--gloss-bd);
+  border-radius: 8px;
+  padding: 1.1em 1.3em;
+}
+.glossario-termine {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--h2-color);
+  margin: 0 0 0.5em;
+  padding-bottom: 0.25em;
+  border-bottom: 2px solid var(--gloss-bd);
+}
+
+/* SEZIONI */
+section { margin-bottom: 1rem; }
+section > * + * { margin-top: 1.5rem; }
+section > h2 { margin-top: 0; }
+section > h3 { margin-top: 2rem; }
+
+/* FOCUS */
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+/* UTILITY */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* FOOTER DI PAGINA */
+.doc-footer {
+  background: #1a3a5c;
+  color: #e8f2ff;
+  padding: 2rem 2.5rem;
+  margin-top: 3rem;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.doc-footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+  max-width: 72ch;
+  margin: 0 auto 1.5rem;
+}
+.doc-footer-col { flex: 1; min-width: 220px; }
+.doc-footer-col h3 {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #a8d0f0;
+  margin: 0 0 0.6em;
+  border-bottom: 1px solid rgba(168,208,240,0.3);
+  padding-bottom: 0.4em;
+}
+.doc-footer-col p,
+.doc-footer-col ul { margin: 0 0 0.4em; padding: 0; list-style: none; color: #c8dff2; font-size: 0.95rem; }
+.doc-footer-col ul li { margin-bottom: 0.25em; }
+.doc-footer-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(168,208,240,0.4);
+  border-radius: 4px;
+  padding: 0.2em 0.65em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #a8d0f0;
+  letter-spacing: 0.04em;
+  margin-right: 0.4em;
+  margin-bottom: 0.4em;
+}
+.doc-footer-copy {
+  max-width: 72ch;
+  margin: 0 auto;
+  font-size: 0.88rem;
+  color: #7aa8c8;
+  border-top: 1px solid rgba(168,208,240,0.2);
+  padding-top: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 760px) {
+  .page-layout { flex-direction: column; }
+  #navscroll {
+    position: sticky; top: 0;
+    width: 100%; min-width: 0; max-height: none;
+    overflow-y: visible;
+    border-right: none;
+    border-bottom: 4px solid var(--nav-border);
+    border-radius: 0;
+    padding: 0.6rem 1rem;
+    z-index: 100;
+  }
+  .nav-titolo { display: none; }
+  #navscroll ul { display: flex; flex-wrap: wrap; gap: 0.2em 0.4em; }
+  #navscroll li { margin-bottom: 0; }
+  .nav-item { font-size: 0.85rem; padding: 0.25em 0.5em; }
+  .page-layout > main { padding: 1.5rem 1.2rem 4rem; }
+  .schema-griglia { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .schema-griglia { grid-template-columns: 1fr; }
+  .page-layout > main { padding: 1rem 1rem 3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-item { transition: none; }
+}
+
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
+
+  <div class="page-layout">
+
+    <nav id="navscroll" aria-label="Indice sezioni" role="navigation">
+      <p class="nav-titolo" aria-hidden="true">In questa pagina</p>
+      <ul role="list">
+        <li><a href="#sez-dei"              class="nav-item">Cos'e' la DEI</a></li>
+        <li><a href="#sez-ruolo-persona"    class="nav-item">Il tuo ruolo</a></li>
+        <li><a href="#sez-ruolo-resp"       class="nav-item">Se sei Responsabile</a></li>
+        <li><a href="#sez-processi-interni" class="nav-item">DEI in azienda</a></li>
+        <li><a href="#sez-processi-esterni" class="nav-item">DEI verso i clienti</a></li>
+        <li><a href="#sez-governance"       class="nav-item">Chi controlla</a></li>
+        <li><a href="#sez-glossario"        class="nav-item">Glossario</a></li>
+      </ul>
+    </nav>
+
+    <main id="main-content" role="main">
+
+      <div class="doc-header">
+        <h1>Policy DEI del Gruppo FS Italiane</h1>
+        <p class="doc-subtitle">Diversity, Equality &amp; Inclusion &#8212; versione accessibile</p>
+        <p class="doc-meta">Disposizione di Gruppo n.&nbsp;311/COA &middot; 28 ottobre 2022</p>
+      </div>
+
+      <div class="nota-lettura" role="note" aria-label="Come leggere questa pagina">
+        <p>Usa l'indice a sinistra per saltare direttamente alla sezione che ti interessa.</p>
+        <p>I termini con <span class="n-demo">sottolineatura punteggiata</span> hanno una spiegazione: passa il mouse sopra (o tocca) per leggerla.</p>
+      </div>
+
+
+      <!-- SEZIONE 1: COS E' LA DEI -->
+      <section id="sez-dei" aria-labelledby="h-sez-dei">
+        <h2 id="h-sez-dei">Cos'&egrave; la DEI</h2>
+
+        <p><span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+            data-term="DEI"
+            data-nota="DEI e' l'abbreviazione di Diversity, Equality e Inclusion. In italiano: Diversita', Uguaglianza e Inclusione. E' l'insieme di principi che guidano il modo in cui un'organizzazione rispetta e valorizza le differenze tra le persone.">DEI</span>
+          sta per <strong>Diversity, Equality &amp; Inclusion</strong>.</p>
+
+        <p>In italiano: <strong>Diversit&agrave;, Uguaglianza e Inclusione</strong>.</p>
+
+        <p>Questo documento spiega i principi DEI del <strong>Gruppo Ferrovie dello Stato Italiane</strong>.</p>
+
+        <div class="box-spiegazione">
+          <span class="box-label">In parole semplici</span>
+          <p>Ogni persona &egrave; diversa dalle altre. Queste differenze hanno valore. Il Gruppo FS si impegna a riconoscerle, rispettarle e valorizzarle.</p>
+        </div>
+
+        <p>L'obiettivo della DEI &egrave; creare un <strong>ambiente di lavoro sicuro e positivo</strong> in cui ogni persona possa esprimere chi &egrave;, confrontarsi con chi &egrave; diverso da s&eacute;, e contribuire con le proprie idee.</p>
+
+        <div class="box-esempio">
+          <span class="box-label">Perche' e' utile per tutti</span>
+          <p>Quando persone diverse lavorano insieme nascono pi&ugrave; idee e soluzioni nuove. Questo aiuta sia le singole persone sia l'intera azienda a crescere.</p>
+        </div>
+
+        <p>Questa Policy si basa su impegni internazionali, tra cui il
+          <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+            data-term="Global Compact delle Nazioni Unite"
+            data-nota="Il Global Compact e' un accordo internazionale promosso dalle Nazioni Unite. Le aziende che vi aderiscono si impegnano a rispettare 10 principi su: diritti umani, condizioni di lavoro, ambiente e lotta alla corruzione. Il Gruppo FS ha aderito nell'agosto 2017.">Global Compact</span>
+          (2017) e i
+          <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+            data-term="SDGs - Obiettivi di Sviluppo Sostenibile"
+            data-nota="Gli SDGs (Sustainable Development Goals) sono 17 obiettivi fissati dalle Nazioni Unite per il 2030. Riguardano: ridurre la poverta', garantire istruzione di qualita', ridurre le disuguaglianze, proteggere l'ambiente. Anche le aziende contribuiscono a raggiungerli.">17 Obiettivi di Sviluppo Sostenibile</span>
+          per il 2030.</p>
+
+        <div class="box-schema" role="figure" aria-labelledby="schema-dei-cap">
+          <div class="schema-griglia" role="list">
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">D</span>
+              <strong class="schema-card-titolo">Diversit&agrave;</strong>
+              <p class="schema-card-desc">Riconoscere che ogni persona &egrave; unica.</p>
+            </div>
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">U</span>
+              <strong class="schema-card-titolo">Uguaglianza</strong>
+              <p class="schema-card-desc">Trattare tutti con giustizia e pari opportunit&agrave;.</p>
+            </div>
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">I</span>
+              <strong class="schema-card-titolo">Inclusione</strong>
+              <p class="schema-card-desc">Creare un ambiente dove tutti si sentono accolti.</p>
+            </div>
+          </div>
+          <figcaption id="schema-dei-cap">I tre pilastri della DEI: Diversit&agrave;, Uguaglianza, Inclusione.</figcaption>
+        </div>
+      </section>
+
+
+      <!-- SEZIONE 2: IL TUO RUOLO -->
+      <section id="sez-ruolo-persona" aria-labelledby="h-sez-ruolo-persona">
+        <hr class="sez-sep" aria-hidden="true">
+        <h2 id="h-sez-ruolo-persona">Il tuo ruolo: cosa puoi fare ogni giorno</h2>
+
+        <p>Ogni persona che lavora nel Gruppo FS deve mettere in pratica la DEI ogni giorno. Non &egrave; solo una regola &#8212; &egrave; un modo di comportarsi con i colleghi, i clienti e i fornitori.</p>
+
+        <div class="box-checklist">
+          <span class="box-label">Cosa devi fare</span>
+          <ul class="box-checklist-lista" role="list">
+            <li><strong>Rispettare i diritti e la dignit&agrave; di ogni persona.</strong> Essere corretto, leale e onesto in ogni situazione.</li>
+            <li><strong>Riconoscere e valorizzare le diversit&agrave;.</strong> Favorire il confronto, la collaborazione e la partecipazione di tutti.</li>
+            <li><strong>Comunicare in modo chiaro e coerente.</strong> Usare un linguaggio comprensibile, adatto alla persona con cui parli. Rimuovere gli ostacoli alla partecipazione.</li>
+            <li><strong>Lavorare sui propri
+                <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                  data-term="pregiudizi"
+                  data-nota="Un pregiudizio e' un'opinione formata in anticipo, senza conoscere bene una persona o una situazione. Spesso e' inconsapevole. I pregiudizi influenzano le nostre decisioni senza che ce ne rendiamo conto.">pregiudizi</span>.</strong>
+              Riconoscerli e impegnarsi attivamente a superarli.</li>
+          </ul>
+        </div>
+
+        <div class="box-spiegazione">
+          <span class="box-label">Cosa significa valorizzare le diversita'</span>
+          <p>Non significa ignorare le differenze. Significa riconoscerle e usarle come punti di forza. Un gruppo di lavoro con persone diverse &egrave; pi&ugrave; creativo e capace di risolvere problemi complessi.</p>
+        </div>
+
+        <div class="box-citazione" role="figure" aria-label="Principio guida">
+          <blockquote>
+            <p>La DEI non &egrave; solo una politica aziendale. &Egrave; un modo di lavorare e di stare insieme.</p>
+          </blockquote>
+          <footer>&#8212; Policy DEI, Gruppo FS Italiane</footer>
+        </div>
+      </section>
+
+
+      <!-- SEZIONE 3: RUOLO DEL RESPONSABILE -->
+      <section id="sez-ruolo-resp" aria-labelledby="h-sez-ruolo-resp">
+        <hr class="sez-sep" aria-hidden="true">
+        <h2 id="h-sez-ruolo-resp">Se sei un Responsabile: le tue responsabilit&agrave; aggiuntive</h2>
+
+        <p>Chi gestisce un
+          <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+            data-term="team"
+            data-nota="Con 'team' si intende un gruppo di persone che lavorano insieme su uno stesso obiettivo. In italiano si dice anche 'gruppo di lavoro' o 'squadra'.">team</span>
+          ha responsabilit&agrave; aggiuntive. Un Responsabile &egrave; chi gestisce altri lavoratori: un capo ufficio, un capo area, un dirigente.</p>
+
+        <div class="box-checklist">
+          <span class="box-label">Sei cose da fare</span>
+          <ul class="box-checklist-lista" role="list">
+            <li><strong>Riconoscere le diversit&agrave;</strong> presenti nel suo team.</li>
+            <li><strong>Valorizzare il contributo di ciascuno</strong> in modo equo. Premiare il merito in tutte le valutazioni.</li>
+            <li><strong>Creare le condizioni</strong> perch&eacute; tutti possano esprimere il proprio potenziale, tenendo conto delle esigenze personali
+              (<span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="work life integration"
+                data-nota="Con 'work life integration' si intende l'equilibrio tra lavoro e vita privata. L'azienda cerca di rispettare le esigenze personali dei dipendenti e di trovare soluzioni che tengano conto di entrambe.">work life integration</span>).
+            </li>
+            <li><strong>Garantire equit&agrave; di trattamento.</strong> Assicurarsi che nessuno sia discriminato.</li>
+            <li><strong>Intervenire subito</strong> se viene a conoscenza di comportamenti irrispettosi o discriminatori.</li>
+            <li><strong>Diffondere i principi DEI</strong> tra i propri collaboratori, con l'esempio e con la comunicazione diretta.</li>
+          </ul>
+        </div>
+
+        <div class="box-attenzione">
+          <span class="box-label">Attenzione</span>
+          <p>Se un Responsabile viene a conoscenza di comportamenti discriminatori, deve intervenire. Non pu&ograve; ignorarli o rimandare. Ha il dovere di agire, anche con il supporto delle funzioni Risorse Umane.</p>
+        </div>
+
+        <div class="box-esempio">
+          <span class="box-label">Esempio concreto</span>
+          <p>Un Responsabile che organizza le riunioni solo in orari incompatibili con chi ha figli piccoli non sta applicando la DEI. Deve cercare orari che vadano bene per tutti, compatibilmente con le esigenze lavorative.</p>
+        </div>
+      </section>
+
+
+      <!-- SEZIONE 4: DEI NEI PROCESSI INTERNI -->
+      <section id="sez-processi-interni" aria-labelledby="h-sez-processi-interni">
+        <hr class="sez-sep" aria-hidden="true">
+        <h2 id="h-sez-processi-interni">Come la DEI funziona dentro l'azienda</h2>
+
+        <p>La DEI non riguarda solo il comportamento delle singole persone. Riguarda anche il modo in cui l'azienda funziona al suo interno. Ci sono tre aree principali.</p>
+
+        <div class="box-schema" role="figure" aria-labelledby="schema-int-cap">
+          <div class="schema-griglia" role="list">
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">1</span>
+              <strong class="schema-card-titolo">Processi HR</strong>
+              <p class="schema-card-desc">Selezione, crescita professionale, valutazione.</p>
+            </div>
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">2</span>
+              <strong class="schema-card-titolo">Comunicazione interna</strong>
+              <p class="schema-card-desc">Come l'azienda parla ai dipendenti.</p>
+            </div>
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">3</span>
+              <strong class="schema-card-titolo">Servizi digitali</strong>
+              <p class="schema-card-desc">App, intranet, portali per i dipendenti.</p>
+            </div>
+          </div>
+          <figcaption id="schema-int-cap">Le tre aree dove la DEI viene applicata all'interno del Gruppo FS.</figcaption>
+        </div>
+
+        <h3>Processi HR</h3>
+
+        <p>Le
+          <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+            data-term="funzioni Risorse Umane (HR)"
+            data-nota="Le Risorse Umane (Human Resources, HR) e' la funzione aziendale che si occupa delle persone: assunzioni, contratti, valutazioni, formazione, benessere. Ogni grande azienda ha un ufficio HR.">funzioni Risorse Umane</span>
+          devono garantire pari opportunit&agrave; in tutte le fasi della vita lavorativa: dalla selezione alla crescita professionale, fino alla fine del rapporto di lavoro.</p>
+
+        <div class="box-checklist">
+          <span class="box-label">Cosa devono fare le funzioni HR</span>
+          <ul class="box-checklist-lista" role="list">
+            <li>Garantire <strong>pari opportunit&agrave;</strong> tra uomini e donne a tutti i livelli dell'organizzazione.</li>
+            <li>Usare
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="criteri meritocratici"
+                data-nota="Un criterio meritocratico e' un criterio basato sulle competenze e sui risultati effettivi. Non tiene conto di caratteristiche personali come genere, eta' o provenienza.">criteri meritocratici</span>
+              nelle valutazioni.</li>
+            <li>Tutelare le persone pi&ugrave; esposte al rischio di
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="discriminazione"
+                data-nota="La discriminazione e' il trattamento ingiusto di una persona a causa delle sue caratteristiche personali: genere, eta', etnia, disabilita'. In Italia e in Europa e' vietata dalla legge in ambito lavorativo.">discriminazione</span>:
+              donne, persone anziane, persone con disabilit&agrave;.</li>
+            <li>Garantire la
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="Work Life Integration"
+                data-nota="Con 'Work Life Integration' si intende l'equilibrio tra lavoro e vita privata. L'azienda si impegna a rispettare le esigenze personali dei dipendenti e a trovare soluzioni che tengano conto di entrambe.">Work Life Integration</span>.</li>
+            <li>Garantire
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="accomodamenti ragionevoli"
+                data-nota="Gli accomodamenti ragionevoli sono modifiche al posto di lavoro pensate per una persona specifica. Per esempio: postazione adattata, orario flessibile, materiali in formato alternativo. 'Ragionevoli' significa senza costi eccessivi per l'azienda.">accomodamenti ragionevoli</span>
+              per chi ne ha bisogno.</li>
+            <li>Includere i <strong>comportamenti inclusivi</strong> nella valutazione annuale di ogni dipendente.</li>
+            <li>Usare modalit&agrave; di comunicazione <strong>accessibili</strong> in termini fisici, linguistici e culturali.</li>
+          </ul>
+        </div>
+
+        <h3>Comunicazione interna</h3>
+
+        <p>La comunicazione interna comprende tutto ci&ograve; che l'azienda dice ai dipendenti: email, intranet, riunioni, app, comunicati interni.</p>
+
+        <div class="box-checklist">
+          <span class="box-label">Cosa deve fare</span>
+          <ul class="box-checklist-lista" role="list">
+            <li>Usare strumenti <strong>accessibili a tutti</strong>: comprensibili in qualsiasi lingua e formato.</li>
+            <li>Diffondere le iniziative DEI, di
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="caring"
+                data-nota="Con 'caring' si intende l'insieme delle attivita' dell'azienda per prendersi cura dei propri dipendenti: supporto psicologico, assistenza familiare, programmi di benessere.">caring</span>
+              e di
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="welfare aziendale"
+                data-nota="Il welfare aziendale e' l'insieme dei benefici non monetari che l'azienda offre ai dipendenti: buoni pasto, assistenza sanitaria, rimborsi spese, servizi per la famiglia.">welfare</span>.</li>
+            <li>Promuovere un modello organizzativo <strong>rispettoso e inclusivo</strong>.</li>
+          </ul>
+        </div>
+
+        <h3>Servizi digitali interni</h3>
+
+        <p>I servizi digitali del Gruppo &#8212; come la
+          <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+            data-term="intranet"
+            data-nota="L'intranet e' una rete informatica interna all'azienda, accessibile solo ai dipendenti. Contiene informazioni, documenti e strumenti aziendali. E' come un sito web, ma visibile solo dall'interno.">intranet</span>,
+          le app e i portali &#8212; devono essere accessibili a tutti i dipendenti.</p>
+
+        <div class="box-definizione">
+          <span class="box-label">Definizione</span>
+          <p class="box-def-termine">Progettazione universale</p>
+          <p>Un metodo di progettazione che mira a creare prodotti e ambienti utilizzabili da tutti, indipendentemente dall'et&agrave; o dalle capacit&agrave;. L'accessibilit&agrave; si include fin dall'inizio, non si aggiunge dopo.</p>
+        </div>
+
+        <p>Per i servizi gi&agrave; esistenti, la funzione
+          <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+            data-term="People Care"
+            data-nota="La funzione 'People Care' di FS S.p.A. e' l'ufficio che si occupa del benessere dei dipendenti. Controlla anche che la Policy DEI venga applicata correttamente in tutto il Gruppo.">People Care</span>
+          segnala dove ci sono barriere e pianifica interventi per rimuoverle.</p>
+      </section>
+
+
+      <!-- SEZIONE 5: DEI VERSO I CLIENTI -->
+      <section id="sez-processi-esterni" aria-labelledby="h-sez-processi-esterni">
+        <hr class="sez-sep" aria-hidden="true">
+        <h2 id="h-sez-processi-esterni">Come la DEI funziona verso i clienti e i fornitori</h2>
+
+        <p>La DEI riguarda anche il modo in cui il Gruppo FS si relaziona con il mondo esterno: clienti, fornitori e partner.</p>
+
+        <div class="box-schema" role="figure" aria-labelledby="schema-est-cap">
+          <div class="schema-griglia" role="list">
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">1</span>
+              <strong class="schema-card-titolo">Servizi ai passeggeri</strong>
+              <p class="schema-card-desc">Stazioni e treni accessibili a tutti.</p>
+            </div>
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">2</span>
+              <strong class="schema-card-titolo">Comunicazione esterna</strong>
+              <p class="schema-card-desc">Come l'azienda parla al pubblico.</p>
+            </div>
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">3</span>
+              <strong class="schema-card-titolo">Infrastrutture</strong>
+              <p class="schema-card-desc">Stazioni e veicoli progettati per essere accessibili.</p>
+            </div>
+            <div class="schema-card" role="listitem">
+              <span class="schema-card-num" aria-hidden="true">4</span>
+              <strong class="schema-card-titolo">Appalti</strong>
+              <p class="schema-card-desc">Preferire fornitori che applicano la DEI.</p>
+            </div>
+          </div>
+          <figcaption id="schema-est-cap">Le quattro aree dove la DEI si applica verso il mondo esterno.</figcaption>
+        </div>
+
+        <h3>Servizi ai passeggeri</h3>
+
+        <p>Tutti i servizi offerti ai clienti devono garantire <strong>pari opportunit&agrave; e reale accessibilit&agrave;</strong>. Nessun cliente pu&ograve; essere escluso o trattato in modo diverso a causa delle proprie caratteristiche personali.</p>
+
+        <div class="box-checklist">
+          <span class="box-label">Cosa deve fare il Gruppo FS</span>
+          <ul class="box-checklist-lista" role="list">
+            <li>Rispettare il
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="Regolamento Europeo sui diritti dei Passeggeri"
+                data-nota="E' una legge europea che stabilisce i diritti di chi viaggia in treno. Garantisce assistenza per le persone con disabilita', rimborsi in caso di ritardo e informazioni chiare sui servizi.">Regolamento Europeo sui diritti dei Passeggeri</span>.
+              Progettare servizi inclusivi per tutti.</li>
+            <li>Sviluppare servizi specifici per le persone pi&ugrave; esposte al rischio di discriminazione: donne, anziani, persone con disabilit&agrave;.</li>
+            <li>Promuovere una cultura aperta verso i clienti stranieri, di qualsiasi provenienza.</li>
+          </ul>
+        </div>
+
+        <h3>Comunicazione esterna</h3>
+
+        <div class="box-checklist">
+          <span class="box-label">Cosa deve fare</span>
+          <ul class="box-checklist-lista" role="list">
+            <li>Rappresentare la variet&agrave; delle persone reali, senza
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="stereotipi"
+                data-nota="Uno stereotipo e' un'idea fissa e semplificata su un gruppo di persone (es. 'le donne non sanno fare lavori tecnici'). Gli stereotipi sono spesso falsi e possono portare a comportamenti ingiusti.">stereotipi</span>.</li>
+            <li>Usare canali di comunicazione <strong>accessibili</strong> in termini fisici, linguistici e culturali.</li>
+            <li>Valorizzare il ruolo del Gruppo FS come
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="role model"
+                data-nota="Con 'role model' si intende un modello di comportamento positivo che altri possono seguire. Un'azienda equa e inclusiva diventa un esempio per la societa'.">role model</span>
+              equo e inclusivo.</li>
+          </ul>
+        </div>
+
+        <h3>Infrastrutture e trasporto</h3>
+
+        <p>La progettazione di stazioni e materiale rotabile deve garantire accessibilit&agrave; e comfort a tutti i passeggeri, nel rispetto di normative specifiche.</p>
+
+        <div class="box-checklist">
+          <span class="box-label">Normative da rispettare</span>
+          <ul class="box-checklist-lista" role="list">
+            <li>Regolamento Europeo sui diritti dei Passeggeri: progettazione inclusiva per tutti.</li>
+            <li>
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="NIP - Piano Nazionale di Attuazione"
+                data-nota="Il NIP e' il piano italiano che recepisce le regole europee sull'accessibilita' dei trasporti ferroviari. Stabilisce quali lavori fare nelle stazioni e sui treni per renderli accessibili a tutti.">NIP (Piano Nazionale di Attuazione)</span>:
+              accessibilit&agrave; delle infrastrutture ferroviarie.</li>
+            <li>Norme tecniche
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="TSI e UIC"
+                data-nota="TSI (Specifiche Tecniche di Interoperabilita') e UIC (Unione Internazionale delle Ferrovie) sono standard tecnici ferroviari europei e internazionali, anche in materia di accessibilita'.">TSI e UIC</span>:
+              standard tecnici ferroviari europei.</li>
+          </ul>
+        </div>
+
+        <h3>Appalti e scelta dei fornitori</h3>
+
+        <p>Quando il Gruppo FS deve scegliere un fornitore, pu&ograve; assegnare un punteggio aggiuntivo a chi dimostra di applicare la DEI.</p>
+
+        <div class="box-checklist">
+          <span class="box-label">Criteri che valorizzano la DEI</span>
+          <ul class="box-checklist-lista" role="list">
+            <li><span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="bilanciamento di genere nel team"
+                data-nota="Il bilanciamento di genere significa avere un numero equilibrato di uomini e donne nel gruppo di lavoro. Un team bilanciato e' piu' vario e produce risultati migliori.">Bilanciamento di genere</span>
+              nel gruppo di lavoro del fornitore.</li>
+            <li>Possesso di una
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="Certificazione di parita' di genere"
+                data-nota="La certificazione di parita' di genere (UNI/PdR 125) attesta che un'azienda tratta uomini e donne in modo equo in tutte le aree: stipendi, promozioni, formazione e conciliazione vita-lavoro.">Certificazione di parit&agrave; di genere</span>.</li>
+            <li>Avere una Policy DEI propria.</li>
+            <li>Usare strumenti di selezione
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="bias free"
+                data-nota="Un test 'bias free' e' progettato per essere equo: non favorisce ne' svantaggia nessuno in base a caratteristiche come genere, eta' o provenienza. 'Bias' in italiano significa 'pregiudizio'.">bias free</span>
+              (senza pregiudizi incorporati).</li>
+          </ul>
+        </div>
+      </section>
+
+
+      <!-- SEZIONE 6: GOVERNANCE -->
+      <section id="sez-governance" aria-labelledby="h-sez-governance">
+        <hr class="sez-sep" aria-hidden="true">
+        <h2 id="h-sez-governance">Chi controlla che la DEI funzioni</h2>
+
+        <p>La funzione
+          <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+            data-term="People Care"
+            data-nota="La funzione 'People Care' di FS S.p.A. e' l'ufficio che si occupa del benessere e dello sviluppo dei dipendenti. Definisce gli obiettivi DEI per tutto il Gruppo e monitora che vengano rispettati.">People Care</span>
+          di FS S.p.A. &egrave; responsabile del monitoraggio della DEI in tutto il Gruppo.</p>
+
+        <div class="box-processo">
+          <span class="box-label">Passo per passo</span>
+          <p>Cosa fa la funzione People Care:</p>
+          <ol class="box-processo-lista">
+            <li>Studia le <strong>buone pratiche</strong> nazionali e internazionali in materia di DEI.</li>
+            <li>Definisce <strong>obiettivi e
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="KPI"
+                data-nota="I KPI (Key Performance Indicators) sono misure che permettono di valutare se un obiettivo e' stato raggiunto. Per esempio: 'percentuale di donne in posizioni di leadership' e' un KPI DEI.">KPI</span></strong>
+              per la DEI a livello di Gruppo.</li>
+            <li><strong>Monitora</strong> i risultati nel tempo e li confronta con gli anni precedenti.</li>
+            <li><strong>Orienta</strong> i processi aziendali verso un maggior rispetto dei principi DEI.</li>
+            <li><strong>Approva</strong> le iniziative DEI proposte dalle singole Societ&agrave; del Gruppo.</li>
+            <li>Gestisce la comunicazione esterna in tema di
+              <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+                data-term="CSR - Responsabilita' Sociale d'Impresa"
+                data-nota="La CSR (Corporate Social Responsibility) e' l'impegno di un'azienda a comportarsi in modo etico, sostenibile e responsabile verso la societa', l'ambiente e le persone che lavorano per essa.">CSR</span>.</li>
+          </ol>
+        </div>
+
+        <div class="box-spiegazione">
+          <span class="box-label">In parole semplici</span>
+          <p>La funzione People Care &egrave; il "guardiano" della DEI in FS. Controlla che le regole vengano rispettate, misura i progressi e promuove nuove iniziative.</p>
+        </div>
+      </section>
+
+
+      <!-- SEZIONE 7: GLOSSARIO -->
+      <section id="sez-glossario" aria-labelledby="h-sez-glossario">
+        <hr class="sez-sep" aria-hidden="true">
+        <h2 id="h-sez-glossario">Glossario: le parole difficili spiegate</h2>
+
+        <p>Qui trovi le definizioni delle parole pi&ugrave; importanti usate in questo documento. Puoi tornare qui ogni volta che incontri un termine che non ricordi.</p>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Diversit&agrave;</p>
+          <p>Significa riconoscere, rispettare e valorizzare le differenze tra le persone. Queste differenze possono riguardare: genere, identit&agrave; sociale, et&agrave;, capacit&agrave; fisiche e cognitive, orientamento sessuale e affettivo, stato di salute, competenze, cultura, etnia, nazionalit&agrave;, credenze religiose e politiche.</p>
+          <p>La diversit&agrave; non &egrave; un problema da risolvere. &Egrave; una ricchezza da valorizzare.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Equit&agrave;</p>
+          <p>Significa applicare i diritti in modo giusto e adatto alle specificit&agrave; di ciascuno. L'equit&agrave; non elimina le differenze: garantisce a ciascuno le opportunit&agrave; necessarie per partecipare su un piano di parit&agrave;.</p>
+        </div>
+
+        <div class="box-spiegazione">
+          <span class="box-label">Uguaglianza vs equita'</span>
+          <p><strong>Uguaglianza:</strong> do a tutti le stesse cose.</p>
+          <p><strong>Equit&agrave;:</strong> do a ciascuno ci&ograve; di cui ha bisogno per avere le stesse opportunit&agrave; degli altri.</p>
+          <p>Esempio: dare a tutti lo stesso sgabello per guardare oltre un muro &egrave; uguaglianza. Dare uno sgabello pi&ugrave; alto a chi &egrave; pi&ugrave; basso &egrave; equit&agrave;.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Inclusione</p>
+          <p>Significa costruire un ambiente aperto e sicuro dove ogni persona &egrave; incoraggiata a partecipare e a dare il proprio contributo, sentendosi rispettata e ascoltata.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Accessibilit&agrave; e design universale</p>
+          <p><strong>Accessibilit&agrave;:</strong> la caratteristica di un servizio o ambiente di essere usabile da qualsiasi persona, rimuovendo qualsiasi barriera.</p>
+          <p><strong>Design universale:</strong> metodo di progettazione che crea prodotti accessibili a tutti fin dall'inizio.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Stereotipo</p>
+          <p>Un'idea fissa e semplificata su un gruppo di persone. Spesso falsa o parziale. Pu&ograve; portare a comportamenti discriminatori.</p>
+          <p>Esempi: "le donne non sanno fare lavori tecnici", "le persone anziane non sanno usare la tecnologia".</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Pregiudizio (bias)</p>
+          <p>Un'opinione formata in anticipo, senza conoscere bene una persona. Spesso &egrave; inconsapevole e influenza le nostre decisioni.</p>
+          <p>Esempio: scegliere un candidato perch&eacute; "assomiglia" a come immaginiamo un buon manager.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Work Life Integration</p>
+          <p>L'equilibrio tra lavoro e vita privata. L'azienda si impegna a rispettare le esigenze personali dei dipendenti e a trovare soluzioni che tengano conto di entrambe le dimensioni.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-terme">Accomodamento ragionevole</p>
+          <p>Una modifica al posto di lavoro pensata per una persona specifica, per permetterle di lavorare efficacemente nonostante una disabilit&agrave; o una condizione di salute.</p>
+          <p>Esempi: postazione adattata, orario flessibile, materiali in formato audio o grande stampa. "Ragionevole" significa senza costi eccessivi per l'azienda.</p>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- FOOTER DI PAGINA -->
+  <footer class="doc-footer" role="contentinfo">
+    <div class="doc-footer-grid">
+
+      <div class="doc-footer-col">
+        <h3>Editore</h3>
+        <p><strong style="color:#e8f2ff;">OpenDEI Editoria Sociale</strong></p>
+        <p>Adattamento accessibile del documento originale<br>
+        <em>Disposizione di Gruppo n. 311/COA</em><br>
+        Gruppo Ferrovie dello Stato Italiane, 28 ottobre 2022</p>
+      </div>
+
+      <div class="doc-footer-col">
+        <h3>Conformità accessibilità</h3>
+        <p>
+          <span class="doc-footer-badge">WCAG 2.2 — Livello AAA</span>
+          <span class="doc-footer-badge">EN 301 549</span>
+        </p>
+        <ul>
+          <li>Contrasto testo: ≥ 15:1 (AAA)</li>
+          <li>Contrasto badge: ≥ 10:1 (AAA)</li>
+          <li>Spaziatura testo: WCAG 1.4.12</li>
+          <li>Navigazione da tastiera: WCAG 2.1.1</li>
+          <li>Tooltip accessibili: WCAG 1.4.13</li>
+        </ul>
+      </div>
+
+      <div class="doc-footer-col">
+        <h3>Metodologie applicate</h3>
+        <ul>
+          <li><strong style="color:#c8dff2;">Plain Language</strong> — UNI ISO 24495-1:2024</li>
+          <li><strong style="color:#c8dff2;">NDS</strong> — Neurodiversity Design System</li>
+          <li><strong style="color:#c8dff2;">COGA</strong> — Cognitive Accessibility Guidelines</li>
+          <li>Struttura SVO (soggetto–verbo–oggetto)</li>
+          <li>Font Atkinson Hyperlegible (leggibilità)</li>
+          <li>Interlinea e spaziatura ottimizzate per DSA</li>
+        </ul>
+      </div>
+
+    </div>
+    <p class="doc-footer-copy">
+      Documento elaborato a fini informativi e formativi. Il contenuto normativo fa riferimento
+      alla Disposizione di Gruppo FS n. 311/COA (2022). Per uso interno ed educativo.
+      &copy; OpenDEI Editoria Sociale — versione accessibile 2026.
+    </p>
+  </footer>
+
+  <!-- TOOLTIP -->
+  <div id="tt" role="tooltip" aria-hidden="true" aria-live="polite">
+    <div id="tt-term"></div>
+    <div id="tt-body"></div>
+  </div>
+
+  <script>
+    /* TOOLTIP */
+    var tt = document.getElementById('tt');
+    var hideTimer = null;
+
+    function formattaNota(testo) {
+      return '<p>' + testo.trim().replace(/([.?!])\s+/g, '$1</p><p>') + '</p>';
+    }
+    function mostraTT(el, e) {
+      clearTimeout(hideTimer);
+      document.getElementById('tt-term').textContent = el.dataset.term;
+      document.getElementById('tt-body').innerHTML = formattaNota(el.dataset.nota);
+      el.setAttribute('aria-expanded', 'true');
+      tt.setAttribute('aria-hidden', 'false');
+      tt.style.display = 'block';
+      posiziona(e);
+    }
+    function nascondiTT(el) {
+      hideTimer = setTimeout(function() {
+        tt.style.display = 'none';
+        tt.setAttribute('aria-hidden', 'true');
+        if (el) el.setAttribute('aria-expanded', 'false');
+      }, 200);
+    }
+    document.querySelectorAll('.n').forEach(function(el) {
+      el.addEventListener('mouseenter', function(e) { mostraTT(this, e); });
+      el.addEventListener('mousemove', posiziona);
+      el.addEventListener('mouseleave', function() { nascondiTT(this); });
+      el.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        var r = this.getBoundingClientRect();
+        if (tt.style.display === 'block' && tt._owner === this) { nascondiTT(this); }
+        else {
+          if (tt._owner && tt._owner !== this) tt._owner.setAttribute('aria-expanded','false');
+          tt._owner = this;
+          mostraTT(this, { clientX: r.left + r.width/2, clientY: r.top });
+        }
+      }, { passive: false });
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (tt.style.display === 'block') { nascondiTT(this); }
+          else { var r = this.getBoundingClientRect(); mostraTT(this, {clientX:r.left, clientY:r.top}); }
+        }
+        if (e.key === 'Escape') { nascondiTT(this); }
+      });
+      el.addEventListener('blur', function() { nascondiTT(this); });
+    });
+    document.addEventListener('touchstart', function(e) {
+      if (tt.style.display==='block' && !tt.contains(e.target) && !e.target.classList.contains('n')) {
+        nascondiTT(tt._owner||null); tt._owner = null;
+      }
+    });
+    tt.addEventListener('mouseenter', function() { clearTimeout(hideTimer); });
+    tt.addEventListener('mouseleave', function() { nascondiTT(null); });
+    function posiziona(e) {
+      var tw=tt.offsetWidth||360, th=tt.offsetHeight||100;
+      var top=e.clientY-th-18, left=e.clientX+16;
+      if (left+tw > window.innerWidth-12) left=e.clientX-tw-16;
+      if (top<8) top=e.clientY+24;
+      tt.style.left=left+'px'; tt.style.top=top+'px';
+    }
+
+    /* SCROLLSPY */
+    (function() {
+      var navItems = document.querySelectorAll('#navscroll .nav-item');
+      if (!navItems.length) return;
+      var navMap = {};
+      navItems.forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('#')) navMap[href.slice(1)] = link;
+        link.setAttribute('aria-current', 'false');
+      });
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          var link = navMap[entry.target.id];
+          if (!link) return;
+          if (entry.isIntersecting) {
+            navItems.forEach(function(l) { l.setAttribute('aria-current','false'); });
+            link.setAttribute('aria-current','true');
+          }
+        });
+      }, { rootMargin: '0px 0px -65% 0px', threshold: 0 });
+      Object.keys(navMap).forEach(function(id) {
+        var s = document.getElementById(id);
+        if (s) observer.observe(s);
+      });
+    })();
+  </script>
+</body>
+</html>
