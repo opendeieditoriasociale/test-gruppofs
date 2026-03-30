@@ -192,43 +192,64 @@ hr.sez-sep {
 }
 
 /* TOOLTIP TRIGGER */
+/* WCAG 2.5.8 (touch target): padding verticale garantisce min 24px di area
+   toccabile su dispositivi touch senza alterare il layout tipografico */
 .n {
   border-bottom: 2px dotted var(--link);
   cursor: help;
   color: inherit;
-  padding-block: 0.12em;
+  padding-block: 0.15em;
   display: inline-block;
 }
-.n:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
+/* Focus ring arancio — WCAG 2.4.7, contrasto ≥ 3:1 */
+.n:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
 .n-demo { border-bottom: 2px dotted var(--link); }
+/* Touch: su dispositivi pointer grossolano (dita) espandi l'area toccabile (WCAG 2.5.8) */
 @media (pointer: coarse) {
-  .n { padding-block: 0.3em; padding-inline: 0.08em; }
+  .n { padding-block: 0.35em; padding-inline: 0.1em; }
 }
 
-/* TOOLTIP */
+/* ---------------------------------------------------------------
+   TOOLTIP — criteri di accessibilità applicati:
+   • font-size 1.125rem (≥ 18px NDS/WCAG 1.4.4): garantisce leggibilità
+     minima per dislessici e ipovedenti
+   • line-height 1.65: interlinea ottimale NDS per dislessia (WCAG 1.4.12)
+   • word-spacing 0.16em: spazio-parola aumentato, riduce affaticamento
+     nella decodifica delle parole (NDS)
+   • hyphens: none: mai sillabazione automatica — spezza la forma visiva
+     delle parole, critico per dislessia
+   • pointer-events: auto (WCAG 1.4.13): il tooltip è "hoverable"
+   • max-width: min(360px, calc(100vw - 24px)) — su schermi stretti
+     (320–375px) il tooltip non esce mai dalla viewport (responsive)
+   --------------------------------------------------------------- */
 #tt {
   display: none;
   position: fixed;
   z-index: 9999;
-  max-width: min(380px, calc(100vw - 24px));
+  max-width: min(360px, calc(100vw - 24px));
   padding: 14px 18px;
-  background: #112240;
+  background: #1a2e4a;
   color: #f0f6ff;
   border-radius: 8px;
-  font-size: 1.05rem;
+  font-size: 1.125rem;
   line-height: 1.65;
-  word-spacing: 0.10em;
+  word-spacing: 0.16em;
   hyphens: none;
-  box-shadow: 0 8px 28px rgba(0,0,0,.4);
+  box-shadow: 0 6px 24px rgba(0,0,0,.35);
   pointer-events: auto;
 }
+/* Termine in evidenza: font più grande del corpo per creare gerarchia visiva —
+   utile per chi ha difficoltà di orientamento */
 #tt-term {
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   margin-bottom: 8px;
   color: #a8d0f0;
+  letter-spacing: 0.02em;
 }
-#tt-body p { margin: 0 0 0.5em; }
+/* Spaziatura tra frasi: ogni frase è un <p> con margine inferiore.
+   Aumenta la distanza visiva tra frasi, riducendo la densità (dislessia, ADHD). */
+#tt-body p { margin: 0 0 0.55em; }
 #tt-body p:last-child { margin-bottom: 0; }
 
 /* BOX LABEL */
@@ -412,6 +433,22 @@ hr.sez-sep {
   padding-bottom: 0.25em;
   border-bottom: 2px solid var(--gloss-bd);
 }
+.glossario-item ul {
+  margin: 0.3em 0 0.5em 1.2em;
+  padding: 0;
+}
+.glossario-item ul li {
+  margin-bottom: 0.2em;
+}
+.glossario-esempio {
+  margin-top: 0.6em;
+  padding: 0.5em 0.8em;
+  background: rgba(100,160,220,0.08);
+  border-left: 3px solid var(--gloss-bd);
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  font-size: 0.97em;
+}
 
 /* SEZIONI */
 section { margin-bottom: 1rem; }
@@ -481,9 +518,9 @@ section > h3 { margin-top: 2rem; }
   padding-top: 1rem;
 }
 
-/* RESPONSIVE */
-@media (max-width: 760px) {
-  .page-layout { flex-direction: column; }
+/* RESPONSIVE — breakpoint 700px allineato con NDS e skill testo-accessibile */
+@media (max-width: 700px) {
+  .page-layout { flex-direction: column; gap: 0; }
   #navscroll {
     position: sticky; top: 0;
     width: 100%; min-width: 0; max-height: none;
@@ -495,7 +532,7 @@ section > h3 { margin-top: 2rem; }
     z-index: 100;
   }
   .nav-titolo { display: none; }
-  #navscroll ul { display: flex; flex-wrap: wrap; gap: 0.2em 0.4em; }
+  #navscroll ul { display: flex; flex-wrap: wrap; gap: 0.25em 0.75em; }
   #navscroll li { margin-bottom: 0; }
   .nav-item { font-size: 0.85rem; padding: 0.25em 0.5em; }
   .page-layout > main { padding: 1.5rem 1.2rem 4rem; }
@@ -550,10 +587,10 @@ section > h3 { margin-top: 2rem; }
 
         <p><span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
             data-term="DEI"
-            data-nota="DEI e' l'abbreviazione di Diversity, Equality e Inclusion. In italiano: Diversita', Uguaglianza e Inclusione. E' l'insieme di principi che guidano il modo in cui un'organizzazione rispetta e valorizza le differenze tra le persone.">DEI</span>
+            data-nota="DEI e' l'abbreviazione di Diversity, Equality e Inclusion (inglese) = Diversita', Equita' e Inclusione (italiano). Equita' significa dare a ciascuno cio' di cui ha bisogna per avere le stesse opportunita' degli altri. Equita' e' anche l'insieme di principi che guidano il modo in cui un'organizzazione rispetta e valorizza le differenze tra le persone.">DEI</span>
           sta per <strong>Diversity, Equality &amp; Inclusion</strong>.</p>
 
-        <p>In italiano: <strong>Diversit&agrave;, Uguaglianza e Inclusione</strong>.</p>
+        <p>In italiano: <strong>Diversit&agrave;, Equit&agrave; e Inclusione</strong>.</p>
 
         <p>Questo documento spiega i principi DEI del <strong>Gruppo Ferrovie dello Stato Italiane</strong>.</p>
 
@@ -572,12 +609,12 @@ section > h3 { margin-top: 2rem; }
         <p>Questa Policy si basa su impegni internazionali, tra cui il
           <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
             data-term="Global Compact delle Nazioni Unite"
-            data-nota="Il Global Compact e' un accordo internazionale promosso dalle Nazioni Unite. Le aziende che vi aderiscono si impegnano a rispettare 10 principi su: diritti umani, condizioni di lavoro, ambiente e lotta alla corruzione. Il Gruppo FS ha aderito nell'agosto 2017.">Global Compact</span>
+            data-nota="Il Global Compact (inglese) = Accordo internazionale (italiano), promosso dalle Nazioni Unite (ONU). Le aziende che aderiscono all'Accordo internazionale ONU si impegnano a rispettare 10 principi su: diritti umani, condizioni di lavoro, ambiente, lotta alla corruzione. Il Gruppo FS ha aderito all'Accordo internazionale ONU nell'agosto 2017.">Global Compact</span>
           (2017) e i
           <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
             data-term="SDGs - Obiettivi di Sviluppo Sostenibile"
-            data-nota="Gli SDGs (Sustainable Development Goals) sono 17 obiettivi fissati dalle Nazioni Unite per il 2030. Riguardano: ridurre la poverta', garantire istruzione di qualita', ridurre le disuguaglianze, proteggere l'ambiente. Anche le aziende contribuiscono a raggiungerli.">17 Obiettivi di Sviluppo Sostenibile</span>
-          per il 2030.</p>
+            data-nota="SDGs = Sustainable Development Goals (inglese) = Obiettivi di Sviluppo Sostenibile (italiano). Gli Obiettivi di Sviluppo Sostenibile sono 17. Le Nazioni Unite prevedono di raggiungere gli Obiettivi di Sviluppo Sostenibile nel 2030. Gli Obiettivi di Sviluppo Sostenibile hanno come scopo: ridurre la poverta', garantire istruzione di qualita', ridurre le disuguaglianze, proteggere l'ambiente. Le aziende sono le principali protagoniste per raggiungere gli Obiettivi di Sviluppo Sostenibile nel 2030.">17 Obiettivi di Sviluppo Sostenibile</span>
+          per il 2030, e l'accordo europeo CER-ETF Women in Rail (2001) sulla parit&agrave; di genere nel settore ferroviario.</p>
 
         <div class="box-schema" role="figure" aria-labelledby="schema-dei-cap">
           <div class="schema-griglia" role="list">
@@ -587,9 +624,9 @@ section > h3 { margin-top: 2rem; }
               <p class="schema-card-desc">Riconoscere che ogni persona &egrave; unica.</p>
             </div>
             <div class="schema-card" role="listitem">
-              <span class="schema-card-num" aria-hidden="true">U</span>
-              <strong class="schema-card-titolo">Uguaglianza</strong>
-              <p class="schema-card-desc">Trattare tutti con giustizia e pari opportunit&agrave;.</p>
+              <span class="schema-card-num" aria-hidden="true">E</span>
+              <strong class="schema-card-titolo">Equit&agrave;</strong>
+              <p class="schema-card-desc">Garantire a ciascuno le opportunit&agrave; di cui ha bisogno, in modo giusto e adatto alle sue specificit&agrave;.</p>
             </div>
             <div class="schema-card" role="listitem">
               <span class="schema-card-num" aria-hidden="true">I</span>
@@ -597,7 +634,7 @@ section > h3 { margin-top: 2rem; }
               <p class="schema-card-desc">Creare un ambiente dove tutti si sentono accolti.</p>
             </div>
           </div>
-          <figcaption id="schema-dei-cap">I tre pilastri della DEI: Diversit&agrave;, Uguaglianza, Inclusione.</figcaption>
+          <figcaption id="schema-dei-cap">I tre pilastri della DEI: Diversit&agrave;, Equit&agrave;, Inclusione.</figcaption>
         </div>
       </section>
 
@@ -618,7 +655,7 @@ section > h3 { margin-top: 2rem; }
             <li><strong>Lavorare sui propri
                 <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                   data-term="pregiudizi"
-                  data-nota="Un pregiudizio e' un'opinione formata in anticipo, senza conoscere bene una persona o una situazione. Spesso e' inconsapevole. I pregiudizi influenzano le nostre decisioni senza che ce ne rendiamo conto.">pregiudizi</span>.</strong>
+                  data-nota="Bias (inglese) = pregiudizio (italiano). Un pregiudizio e' un'opinione formata in anticipo, senza conoscere bene una persona o una situazione. Il pregiudizio, spesso, avviene in modo inconsapevole. I pregiudizi influenzano le nostre decisioni senza che ce ne rendiamo conto.">pregiudizi</span>.</strong>
               Riconoscerli e impegnarsi attivamente a superarli.</li>
           </ul>
         </div>
@@ -645,7 +682,7 @@ section > h3 { margin-top: 2rem; }
         <p>Chi gestisce un
           <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
             data-term="team"
-            data-nota="Con 'team' si intende un gruppo di persone che lavorano insieme su uno stesso obiettivo. In italiano si dice anche 'gruppo di lavoro' o 'squadra'.">team</span>
+            data-nota="Team (inglese) = Gruppo di lavoro o Squadra (italiano). Il 'team' e' un gruppo di persone che lavorano insieme su uno stesso obiettivo.">team</span>
           ha responsabilit&agrave; aggiuntive. Un Responsabile &egrave; chi gestisce altri lavoratori: un capo ufficio, un capo area, un dirigente.</p>
 
         <div class="box-checklist">
@@ -656,7 +693,7 @@ section > h3 { margin-top: 2rem; }
             <li><strong>Creare le condizioni</strong> perch&eacute; tutti possano esprimere il proprio potenziale, tenendo conto delle esigenze personali
               (<span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="work life integration"
-                data-nota="Con 'work life integration' si intende l'equilibrio tra lavoro e vita privata. L'azienda cerca di rispettare le esigenze personali dei dipendenti e di trovare soluzioni che tengano conto di entrambe.">work life integration</span>).
+                data-nota="Work Life Integration (inglese) = Equilibrio vita-lavoro (italiano). Con 'Equilibrio vita-lavoro' si intende l'equilibrio tra lavoro e vita privata. L'azienda cerca soluzioni in grado di rispettare sia gli interessi del lavoro che le esigenze personali dei dipendenti.">work life integration</span>).
             </li>
             <li><strong>Garantire equit&agrave; di trattamento.</strong> Assicurarsi che nessuno sia discriminato.</li>
             <li><strong>Intervenire subito</strong> se viene a conoscenza di comportamenti irrispettosi o discriminatori.</li>
@@ -709,7 +746,7 @@ section > h3 { margin-top: 2rem; }
         <p>Le
           <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
             data-term="funzioni Risorse Umane (HR)"
-            data-nota="Le Risorse Umane (Human Resources, HR) e' la funzione aziendale che si occupa delle persone: assunzioni, contratti, valutazioni, formazione, benessere. Ogni grande azienda ha un ufficio HR.">funzioni Risorse Umane</span>
+            data-nota="HR = Human Resources (inglese) = Risorse Umane (italiano). Le Risorse Umane e' la funzione aziendale che si occupa delle persone: assunzioni, contratti, valutazioni, formazione, benessere. Ogni grande azienda ha un dipartimento (o funzione) Risorse Umane.">funzioni Risorse Umane</span>
           devono garantire pari opportunit&agrave; in tutte le fasi della vita lavorativa: dalla selezione alla crescita professionale, fino alla fine del rapporto di lavoro.</p>
 
         <div class="box-checklist">
@@ -719,21 +756,21 @@ section > h3 { margin-top: 2rem; }
             <li>Usare
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="criteri meritocratici"
-                data-nota="Un criterio meritocratico e' un criterio basato sulle competenze e sui risultati effettivi. Non tiene conto di caratteristiche personali come genere, eta' o provenienza.">criteri meritocratici</span>
+                data-nota="Un criterio meritocratico e' un criterio basato sulle competenze e sui risultati effettivi. Il criterio non tiene conto di caratteristiche personali come genere, eta' o provenienza.">criteri meritocratici</span>
               nelle valutazioni.</li>
             <li>Tutelare le persone pi&ugrave; esposte al rischio di
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="discriminazione"
-                data-nota="La discriminazione e' il trattamento ingiusto di una persona a causa delle sue caratteristiche personali: genere, eta', etnia, disabilita'. In Italia e in Europa e' vietata dalla legge in ambito lavorativo.">discriminazione</span>:
+                data-nota="La discriminazione e' il trattamento ingiusto di una persona. La causa dell'ingiustizia sono le sue caratteristiche personali: genere, eta', etnia, disabilita'. In Italia e in Europa la discriminazione e' vietata dalla legge in ambito lavorativo.">discriminazione</span>:
               donne, persone anziane, persone con disabilit&agrave;.</li>
             <li>Garantire la
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="Work Life Integration"
-                data-nota="Con 'Work Life Integration' si intende l'equilibrio tra lavoro e vita privata. L'azienda si impegna a rispettare le esigenze personali dei dipendenti e a trovare soluzioni che tengano conto di entrambe.">Work Life Integration</span>.</li>
+                data-nota="Work Life Integration (inglese) = Equilibrio vita-lavoro (italiano). Con 'Equilibrio vita-lavoro' si intende l'equilibrio tra lavoro e vita privata. L'azienda cerca soluzioni in grado di rispettare sia gli interessi del lavoro che le esigenze personali dei dipendenti.">Work Life Integration</span>.</li>
             <li>Garantire
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="accomodamenti ragionevoli"
-                data-nota="Gli accomodamenti ragionevoli sono modifiche al posto di lavoro pensate per una persona specifica. Per esempio: postazione adattata, orario flessibile, materiali in formato alternativo. 'Ragionevoli' significa senza costi eccessivi per l'azienda.">accomodamenti ragionevoli</span>
+                data-nota="Gli accomodamenti ragionevoli sono modifiche al posto di lavoro pensate per una persona specifica. Ad esempio: postazione di lavoro adattata alle esigenze della persona, orario flessibile al lavoro (ingressi - uscite), documenti in formato accessibile. 'Ragionevoli' significa modifiche al posto di lavoro senza costi eccessivi per l'azienda.">accomodamenti ragionevoli</span>
               per chi ne ha bisogno.</li>
             <li>Includere i <strong>comportamenti inclusivi</strong> nella valutazione annuale di ogni dipendente.</li>
             <li>Usare modalit&agrave; di comunicazione <strong>accessibili</strong> in termini fisici, linguistici e culturali.</li>
@@ -751,11 +788,11 @@ section > h3 { margin-top: 2rem; }
             <li>Diffondere le iniziative DEI, di
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="caring"
-                data-nota="Con 'caring' si intende l'insieme delle attivita' dell'azienda per prendersi cura dei propri dipendenti: supporto psicologico, assistenza familiare, programmi di benessere.">caring</span>
+                data-nota="Caring (inglese) = Prendersi cura (italiano). Con 'prendersi cura' si intende l'insieme delle attivita' dell'azienda per garantire il benessere e la felicita' dei propri dipendenti: supporto psicologico, assistenza familiare, programmi di benessere.">caring</span>
               e di
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="welfare aziendale"
-                data-nota="Il welfare aziendale e' l'insieme dei benefici non monetari che l'azienda offre ai dipendenti: buoni pasto, assistenza sanitaria, rimborsi spese, servizi per la famiglia.">welfare</span>.</li>
+                data-nota="Welfare (inglese) = Benessere o Assistenza aziendale (italiano). Il benessere aziendale e' l'insieme dei benefici, non monetari, che l'azienda offre ai dipendenti: buoni pasto, assistenza sanitaria, rimborsi spese, servizi per la famiglia.">welfare</span>.</li>
             <li>Promuovere un modello organizzativo <strong>rispettoso e inclusivo</strong>.</li>
           </ul>
         </div>
@@ -765,7 +802,7 @@ section > h3 { margin-top: 2rem; }
         <p>I servizi digitali del Gruppo &#8212; come la
           <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
             data-term="intranet"
-            data-nota="L'intranet e' una rete informatica interna all'azienda, accessibile solo ai dipendenti. Contiene informazioni, documenti e strumenti aziendali. E' come un sito web, ma visibile solo dall'interno.">intranet</span>,
+            data-nota="Intranet (inglese) = Rete interna aziendale (italiano). L'intranet e' una rete informatica interna all'azienda, accessibile solo ai dipendenti. Contiene informazioni, documenti e strumenti aziendali. E' come un sito web, ma visibile solo dall'interno.">intranet</span>,
           le app e i portali &#8212; devono essere accessibili a tutti i dipendenti.</p>
 
         <div class="box-definizione">
@@ -777,7 +814,7 @@ section > h3 { margin-top: 2rem; }
         <p>Per i servizi gi&agrave; esistenti, la funzione
           <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
             data-term="People Care"
-            data-nota="La funzione 'People Care' di FS S.p.A. e' l'ufficio che si occupa del benessere dei dipendenti. Controlla anche che la Policy DEI venga applicata correttamente in tutto il Gruppo.">People Care</span>
+            data-nota="People care (inglese) = Cura delle persone (italiano). La funzione 'People Care' di FS S.p.A. e' l'ufficio che si occupa del benessere e dello sviluppo dei dipendenti. La funzione 'People Care' di FS S.p.A.: definisce gli obiettivi DEI per tutto il Gruppo, monitora che gli obiettivi DEI vengano rispettati.">People Care</span>
           segnala dove ci sono barriere e pianifica interventi per rimuoverle.</p>
       </section>
 
@@ -840,19 +877,23 @@ section > h3 { margin-top: 2rem; }
             <li>Rappresentare la variet&agrave; delle persone reali, senza
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="stereotipi"
-                data-nota="Uno stereotipo e' un'idea fissa e semplificata su un gruppo di persone (es. 'le donne non sanno fare lavori tecnici'). Gli stereotipi sono spesso falsi e possono portare a comportamenti ingiusti.">stereotipi</span>.</li>
+                data-nota="Uno stereotipo e': un'immagine mentale semplificata, fissa e ampiamente condivisa su un intero gruppo di persone; una 'scorciatoia' che il cervello usa per catalogare la realta', senza lo sforzo di approfondire e comprendere. Una persona ragiona per stereotipi quando attribuisce a un individuo caratteristiche o comportamenti solo in base alla sua appartenenza a una categoria: genere, nazionalita', eta', professione. Gli stereotipi, spesso: sono falsi, possono portare a comportamenti ingiusti nei confronti di una persona.">stereotipi</span>.</li>
             <li>Usare canali di comunicazione <strong>accessibili</strong> in termini fisici, linguistici e culturali.</li>
             <li>Valorizzare il ruolo del Gruppo FS come
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="role model"
-                data-nota="Con 'role model' si intende un modello di comportamento positivo che altri possono seguire. Un'azienda equa e inclusiva diventa un esempio per la societa'.">role model</span>
+                data-nota="Role Model (inglese) = Modello di comportamento (italiano). Con modello di comportamento si intende un modo di agire positivo ed equo, che altri possono seguire. Un'azienda accessibile, equa e inclusiva diventa un esempio per la societa'.">role model</span>
               equo e inclusivo.</li>
           </ul>
         </div>
 
         <h3>Infrastrutture e trasporto</h3>
 
-        <p>La progettazione di stazioni e materiale rotabile deve garantire accessibilit&agrave; e comfort a tutti i passeggeri, nel rispetto di normative specifiche.</p>
+        <p>La progettazione di stazioni e
+          <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
+            data-term="materiale rotabile"
+            data-nota="Termine ferroviario che indica tutti i veicoli che circolano su rotaia: treni, locomotori, vagoni passeggeri, carrozze, treni ad alta velocita'. Nei principi DEI si usa quando si parla di accessibilita' dei treni: sedili, porte, spazi per sedie a rotelle.">materiale rotabile</span>
+          deve garantire accessibilit&agrave; e comfort a tutti i passeggeri, nel rispetto di normative specifiche.</p>
 
         <div class="box-checklist">
           <span class="box-label">Normative da rispettare</span>
@@ -861,12 +902,12 @@ section > h3 { margin-top: 2rem; }
             <li>
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="NIP - Piano Nazionale di Attuazione"
-                data-nota="Il NIP e' il piano italiano che recepisce le regole europee sull'accessibilita' dei trasporti ferroviari. Stabilisce quali lavori fare nelle stazioni e sui treni per renderli accessibili a tutti.">NIP (Piano Nazionale di Attuazione)</span>:
+                data-nota="NIP = National Implementation Plan (inglese) = Piano Nazionale di Attuazione (italiano). Il Piano Italiano di Attuazione recepisce le regole europee sull'accessibilita' dei trasporti ferroviari. Per rendere accessibili a tutti stazioni e treni, il Piano stabilisce quali lavori devono essere fatti.">NIP (Piano Nazionale di Attuazione)</span>:
               accessibilit&agrave; delle infrastrutture ferroviarie.</li>
             <li>Norme tecniche
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="TSI e UIC"
-                data-nota="TSI (Specifiche Tecniche di Interoperabilita') e UIC (Unione Internazionale delle Ferrovie) sono standard tecnici ferroviari europei e internazionali, anche in materia di accessibilita'.">TSI e UIC</span>:
+                data-nota="TSI = Technical Specifications for Interoperability (inglese) = Specifiche Tecniche di Interoperabilita' (italiano). Sono le regole tecniche per garantire che i treni possano circolare in modo sicuro e senza interruzioni su tutta la rete ferroviaria europea. UIC = Union Internationale des Chemins de fer (francese) = Unione Internazionale delle Ferrovie (italiano). Organizzazione che riunisce gli operatori del settore ferroviario a livello mondiale. TSI e UIC hanno regole anche in materia di accessibilita'.">TSI e UIC</span>:
               standard tecnici ferroviari europei.</li>
           </ul>
         </div>
@@ -880,17 +921,17 @@ section > h3 { margin-top: 2rem; }
           <ul class="box-checklist-lista" role="list">
             <li><span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="bilanciamento di genere nel team"
-                data-nota="Il bilanciamento di genere significa avere un numero equilibrato di uomini e donne nel gruppo di lavoro. Un team bilanciato e' piu' vario e produce risultati migliori.">Bilanciamento di genere</span>
+                data-nota="Il bilanciamento di genere significa avere un numero equilibrato di uomini e donne nel gruppo di lavoro. Un gruppo bilanciato e' piu' vario e produce risultati migliori.">Bilanciamento di genere</span>
               nel gruppo di lavoro del fornitore.</li>
             <li>Possesso di una
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="Certificazione di parita' di genere"
-                data-nota="La certificazione di parita' di genere (UNI/PdR 125) attesta che un'azienda tratta uomini e donne in modo equo in tutte le aree: stipendi, promozioni, formazione e conciliazione vita-lavoro.">Certificazione di parit&agrave; di genere</span>.</li>
+                data-nota="La certificazione di parita' di genere (UNI/PdR 125:2022) attesta che un'azienda tratta uomini e donne in modo equo in tutte le aree: stipendi, promozioni, formazione, conciliazione vita-lavoro.">Certificazione di parit&agrave; di genere</span>.</li>
             <li>Avere una Policy DEI propria.</li>
             <li>Usare strumenti di selezione
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="bias free"
-                data-nota="Un test 'bias free' e' progettato per essere equo: non favorisce ne' svantaggia nessuno in base a caratteristiche come genere, eta' o provenienza. 'Bias' in italiano significa 'pregiudizio'.">bias free</span>
+                data-nota="Bias free (inglese) = Libero da pregiudizi. Una procedura o un controllo e' 'libero da pregiudizi' quando non favorisce ne' svantaggia nessuno rispetto a caratteristiche come: genere, eta', cultura, religione, provenienza.">bias free</span>
               (senza pregiudizi incorporati).</li>
           </ul>
         </div>
@@ -905,7 +946,7 @@ section > h3 { margin-top: 2rem; }
         <p>La funzione
           <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
             data-term="People Care"
-            data-nota="La funzione 'People Care' di FS S.p.A. e' l'ufficio che si occupa del benessere e dello sviluppo dei dipendenti. Definisce gli obiettivi DEI per tutto il Gruppo e monitora che vengano rispettati.">People Care</span>
+            data-nota="People care (inglese) = Cura delle persone (italiano). La funzione 'People Care' di FS S.p.A. e' l'ufficio che si occupa del benessere e dello sviluppo dei dipendenti. La funzione 'People Care' di FS S.p.A.: definisce gli obiettivi DEI per tutto il Gruppo, monitora che gli obiettivi DEI vengano rispettati.">People Care</span>
           di FS S.p.A. &egrave; responsabile del monitoraggio della DEI in tutto il Gruppo.</p>
 
         <div class="box-processo">
@@ -916,7 +957,7 @@ section > h3 { margin-top: 2rem; }
             <li>Definisce <strong>obiettivi e
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="KPI"
-                data-nota="I KPI (Key Performance Indicators) sono misure che permettono di valutare se un obiettivo e' stato raggiunto. Per esempio: 'percentuale di donne in posizioni di leadership' e' un KPI DEI.">KPI</span></strong>
+                data-nota="KPI = Key Performance Indicators (inglese) = Indicatori chiave delle prestazioni (italiano). Misure che permettono di valutare se un obiettivo e' stato raggiunto. Ad esempio: 'Percentuale di donne in posizioni di comando'.">KPI</span></strong>
               per la DEI a livello di Gruppo.</li>
             <li><strong>Monitora</strong> i risultati nel tempo e li confronta con gli anni precedenti.</li>
             <li><strong>Orienta</strong> i processi aziendali verso un maggior rispetto dei principi DEI.</li>
@@ -924,13 +965,18 @@ section > h3 { margin-top: 2rem; }
             <li>Gestisce la comunicazione esterna in tema di
               <span class="n" role="button" tabindex="0" aria-describedby="tt" aria-expanded="false" aria-haspopup="dialog"
                 data-term="CSR - Responsabilita' Sociale d'Impresa"
-                data-nota="La CSR (Corporate Social Responsibility) e' l'impegno di un'azienda a comportarsi in modo etico, sostenibile e responsabile verso la societa', l'ambiente e le persone che lavorano per essa.">CSR</span>.</li>
+                data-nota="CSR = Corporate Social Responsibility (inglese) = Responsabilita' Sociale d'Impresa (italiano). L'impegno di un'azienda a comportarsi in modo etico, sostenibile e responsabile nei confronti di: societa', ambiente, persone che lavorano in azienda.">CSR</span>.</li>
           </ol>
         </div>
 
         <div class="box-spiegazione">
           <span class="box-label">In parole semplici</span>
-          <p>La funzione People Care &egrave; il "guardiano" della DEI in FS. Controlla che le regole vengano rispettate, misura i progressi e promuove nuove iniziative.</p>
+          <p>La funzione People Care &egrave; il "controllore" della DEI nel Gruppo FS:</p>
+          <ul>
+            <li>controlla che le regole vengano rispettate,</li>
+            <li>misura i progressi,</li>
+            <li>promuove nuove iniziative.</li>
+          </ul>
         </div>
       </section>
 
@@ -944,54 +990,306 @@ section > h3 { margin-top: 2rem; }
 
         <div class="glossario-item">
           <p class="glossario-termine">Diversit&agrave;</p>
-          <p>Significa riconoscere, rispettare e valorizzare le differenze tra le persone. Queste differenze possono riguardare: genere, identit&agrave; sociale, et&agrave;, capacit&agrave; fisiche e cognitive, orientamento sessuale e affettivo, stato di salute, competenze, cultura, etnia, nazionalit&agrave;, credenze religiose e politiche.</p>
-          <p>La diversit&agrave; non &egrave; un problema da risolvere. &Egrave; una ricchezza da valorizzare.</p>
+          <p>Riconoscere, rispettare e valorizzare le differenze tra le persone.</p>
+          <p>Le differenze possono riguardare:</p>
+          <ul>
+            <li>genere,</li>
+            <li>identit&agrave; sociale,</li>
+            <li>et&agrave;,</li>
+            <li>capacit&agrave; fisiche e cognitive,</li>
+            <li>orientamento sessuale e affettivo,</li>
+            <li>stato di salute,</li>
+            <li>competenze,</li>
+            <li>cultura, etnia, nazionalit&agrave;,</li>
+            <li>credenze religiose e politiche.</li>
+          </ul>
+          <p>La diversit&agrave; non &egrave; un problema da risolvere: &egrave; una ricchezza da valorizzare.</p>
+          <p class="glossario-esempio">Esempio: un gruppo di lavoro con persone di et&agrave;, competenze ed esperienze diverse produce soluzioni pi&ugrave; creative di un gruppo omogeneo.</p>
         </div>
 
         <div class="glossario-item">
           <p class="glossario-termine">Equit&agrave;</p>
-          <p>Significa applicare i diritti in modo giusto e adatto alle specificit&agrave; di ciascuno. L'equit&agrave; non elimina le differenze: garantisce a ciascuno le opportunit&agrave; necessarie per partecipare su un piano di parit&agrave;.</p>
+          <p>Applicare i diritti in modo giusto e adatto alle specificit&agrave; di ciascuno.</p>
+          <p>L'equit&agrave; non elimina le differenze: garantisce a ciascuno le opportunit&agrave; necessarie per partecipare su un piano di parit&agrave;.</p>
+          <p>Diversa dall'uguaglianza (trattare tutti allo stesso modo), l'equit&agrave; d&agrave; a ciascuno ci&ograve; di cui ha bisogno.</p>
         </div>
 
         <div class="box-spiegazione">
-          <span class="box-label">Uguaglianza vs equita'</span>
+          <span class="box-label">Uguaglianza vs equit&agrave;</span>
           <p><strong>Uguaglianza:</strong> do a tutti le stesse cose.</p>
           <p><strong>Equit&agrave;:</strong> do a ciascuno ci&ograve; di cui ha bisogno per avere le stesse opportunit&agrave; degli altri.</p>
-          <p>Esempio: dare a tutti lo stesso sgabello per guardare oltre un muro &egrave; uguaglianza. Dare uno sgabello pi&ugrave; alto a chi &egrave; pi&ugrave; basso &egrave; equit&agrave;.</p>
+          <p class="glossario-esempio">Esempio: dare a tutti lo stesso sgabello per guardare oltre un muro &egrave; uguaglianza. Dare uno sgabello pi&ugrave; alto a chi &egrave; pi&ugrave; basso &egrave; equit&agrave;.</p>
         </div>
 
         <div class="glossario-item">
           <p class="glossario-termine">Inclusione</p>
-          <p>Significa costruire un ambiente aperto e sicuro dove ogni persona &egrave; incoraggiata a partecipare e a dare il proprio contributo, sentendosi rispettata e ascoltata.</p>
+          <p>Costruire un ambiente aperto e sicuro.</p>
+          <p>Un ambiente dove ogni persona:</p>
+          <ul>
+            <li>&egrave; incoraggiata a partecipare e a dare il proprio contributo;</li>
+            <li>&egrave; rispettata e ascoltata.</li>
+          </ul>
+          <p>Un ambiente dove sono possibili comportamenti attivi e proattivi.</p>
+          <p class="glossario-esempio">Esempio: una riunione in cui tutti possono intervenire. Le opinioni sono ascoltate senza giudizio. Nessuno viene interrotto.</p>
         </div>
 
         <div class="glossario-item">
-          <p class="glossario-termine">Accessibilit&agrave; e design universale</p>
-          <p><strong>Accessibilit&agrave;:</strong> la caratteristica di un servizio o ambiente di essere usabile da qualsiasi persona, rimuovendo qualsiasi barriera.</p>
-          <p><strong>Design universale:</strong> metodo di progettazione che crea prodotti accessibili a tutti fin dall'inizio.</p>
+          <p class="glossario-termine">Accessibilit&agrave;</p>
+          <p>La caratteristica di un servizio, dispositivo o ambiente di essere fruibile con facilit&agrave; da qualsiasi tipologia di utente.</p>
+          <p>Tutto diviene accessibile rimuovendo qualsiasi barriera o ostacolo.</p>
+          <p>In ambito ferroviario include:</p>
+          <ul>
+            <li>rampe,</li>
+            <li>ascensori,</li>
+            <li>informazioni in formati alternativi,</li>
+            <li>ausili per non udenti e ipovedenti.</li>
+          </ul>
+          <p class="glossario-esempio">Esempio: una stazione con ascensori funzionanti, mappe tattili e annunci audio &egrave; pi&ugrave; accessibile di una stazione senza questi strumenti.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Design universale</p>
+          <p>Metodologia progettuale.</p>
+          <p>Ha l'obiettivo di realizzare prodotti, strutture e ambienti accessibili a tutti, in qualsiasi condizione, rispondendo alle esigenze di un pubblico pi&ugrave; vasto possibile.</p>
+          <p>L'accessibilit&agrave; &egrave; considerata fin dalla fase di progettazione, non aggiunta successivamente.</p>
+          <p class="glossario-esempio">Esempio: un treno progettato fin dall'inizio con spazi per sedie a rotelle, display ad alto contrasto e maniglie a diverse altezze &egrave; frutto di design universale.</p>
         </div>
 
         <div class="glossario-item">
           <p class="glossario-termine">Stereotipo</p>
-          <p>Un'idea fissa e semplificata su un gruppo di persone. Spesso falsa o parziale. Pu&ograve; portare a comportamenti discriminatori.</p>
-          <p>Esempi: "le donne non sanno fare lavori tecnici", "le persone anziane non sanno usare la tecnologia".</p>
+          <p>Un'idea fissa e semplificata su un gruppo di persone. Spesso falsa o parziale. Pu&ograve; portare a comportamenti discriminatori anche involontari.</p>
+          <p>Gli stereotipi si superano attraverso la conoscenza e il confronto diretto con le persone.</p>
+          <p class="glossario-esempio">Esempio: &ldquo;Le donne non sanno fare lavori tecnici&rdquo;. &ldquo;Le persone anziane non sanno usare la tecnologia&rdquo;. Entrambe sono affermazioni stereotipate e false.</p>
         </div>
 
         <div class="glossario-item">
           <p class="glossario-termine">Pregiudizio (bias)</p>
-          <p>Un'opinione formata in anticipo, senza conoscere bene una persona. Spesso &egrave; inconsapevole e influenza le nostre decisioni.</p>
-          <p>Esempio: scegliere un candidato perch&eacute; "assomiglia" a come immaginiamo un buon manager.</p>
+          <p>Un'opinione formata in anticipo, senza conoscere bene una persona. Il pregiudizio influenza le nostre decisioni e valutazioni, spesso in modo inconsapevole.</p>
+          <p>Riconoscere i propri pregiudizi &egrave; il primo passo per superarli.</p>
+          <p class="glossario-esempio">Esempio: scegliere un candidato perch&eacute; &ldquo;assomiglia&rdquo; a come immaginiamo un buon manager, ignorando candidati pi&ugrave; qualificati, ma con un profilo meno familiare.</p>
         </div>
 
         <div class="glossario-item">
-          <p class="glossario-termine">Work Life Integration</p>
-          <p>L'equilibrio tra lavoro e vita privata. L'azienda si impegna a rispettare le esigenze personali dei dipendenti e a trovare soluzioni che tengano conto di entrambe le dimensioni.</p>
+          <p class="glossario-termine">Work Life Integration (Equilibrio vita-lavoro)</p>
+          <p>L'equilibrio tra vita lavorativa e vita privata. L'azienda si impegna a rispettare le esigenze personali dei dipendenti (famiglia, salute, cura di familiari) e a trovare soluzioni lavorative che tengano conto di entrambe le dimensioni.</p>
+          <p class="glossario-esempio">Esempio: possibilit&agrave; di lavorare in smart working alcuni giorni, orari flessibili per chi ha figli piccoli o familiari anziani da assistere.</p>
         </div>
 
         <div class="glossario-item">
-          <p class="glossario-terme">Accomodamento ragionevole</p>
+          <p class="glossario-termine">Accomodamento ragionevole</p>
           <p>Una modifica al posto di lavoro pensata per una persona specifica, per permetterle di lavorare efficacemente nonostante una disabilit&agrave; o una condizione di salute.</p>
-          <p>Esempi: postazione adattata, orario flessibile, materiali in formato audio o grande stampa. "Ragionevole" significa senza costi eccessivi per l'azienda.</p>
+          <p>&ldquo;Ragionevole&rdquo; significa che la modifica non deve imporre un onere sproporzionato o eccessivo per l'azienda.</p>
+          <p class="glossario-esempio">Esempio: postazione ergonomica personalizzata, orario flessibile per esigenze di cura, materiali in formato audio o grande stampa.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">DEI &mdash; Diversity, Equality &amp; Inclusion</p>
+          <p>Acronimo che indica l'insieme dei principi aziendali relativi a Diversit&agrave;, Equit&agrave; e Inclusione.</p>
+          <p>&Egrave; la sigla con cui viene identificata la Policy del Gruppo FS Italiane che definisce impegni, responsabilit&agrave; e processi per garantire un ambiente di lavoro e un servizio ai clienti equo, inclusivo e non discriminatorio.</p>
+          <p class="glossario-esempio">Esempio: un programma DEI aziendale pu&ograve; includere: formazione contro i pregiudizi, monitoraggio della parit&agrave; salariale, servizi accessibili ai passeggeri con disabilit&agrave;.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Global Compact delle Nazioni Unite</p>
+          <p>Iniziativa internazionale promossa dall'ONU.</p>
+          <p>Le aziende aderenti si impegnano a rispettare 10 principi fondamentali in quattro aree:</p>
+          <ul>
+            <li>diritti umani,</li>
+            <li>standard lavorativi,</li>
+            <li>protezione ambientale,</li>
+            <li>lotta alla corruzione.</li>
+          </ul>
+          <p>Il Gruppo FS Italiane ha aderito al Global Compact nell'agosto 2017.</p>
+          <p class="glossario-esempio">Esempio: Principio 6 del Global Compact: &ldquo;Le imprese sono invitate a eliminare le discriminazioni in materia di impiego e professione.&rdquo;</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">SDGs &mdash; Obiettivi di Sviluppo Sostenibile</p>
+          <p>Sustainable Development Goals: 17 obiettivi globali fissati dalle Nazioni Unite nell'Agenda 2030.</p>
+          <p>Gli obiettivi includono:</p>
+          <ul>
+            <li>ridurre la povert&agrave;,</li>
+            <li>garantire istruzione di qualit&agrave;,</li>
+            <li>ridurre le disuguaglianze,</li>
+            <li>favorire il lavoro dignitoso.</li>
+          </ul>
+          <p>Le aziende contribuiscono al loro raggiungimento attraverso le proprie politiche.</p>
+          <p class="glossario-esempio">Esempio: l'SDG 10 (Ridurre le disuguaglianze) &egrave; direttamente collegato alla Policy DEI del Gruppo FS.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Risorse Umane (HR)</p>
+          <p>HR = Human Resources (inglese) = Risorse Umane (italiano).</p>
+          <p>Le Risorse Umane &egrave; la funzione aziendale che si occupa delle persone:</p>
+          <ul>
+            <li>assunzioni,</li>
+            <li>contratti,</li>
+            <li>valutazioni,</li>
+            <li>formazione,</li>
+            <li>benessere.</li>
+          </ul>
+          <p>Ogni grande azienda ha un dipartimento (o funzione) Risorse Umane.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Caring (Prendersi cura)</p>
+          <p>Caring (inglese) = Prendersi cura (italiano).</p>
+          <p>Con &ldquo;prendersi cura&rdquo; si intende l'insieme delle attivit&agrave; dell'azienda per garantire il benessere e la felicit&agrave; dei propri dipendenti:</p>
+          <ul>
+            <li>supporto psicologico,</li>
+            <li>assistenza familiare,</li>
+            <li>programmi di benessere.</li>
+          </ul>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Welfare (Benessere aziendale)</p>
+          <p>Welfare (inglese) = Benessere o Assistenza aziendale (italiano).</p>
+          <p>Il benessere aziendale &egrave; l'insieme dei benefici, non monetari, che l'azienda offre ai dipendenti:</p>
+          <ul>
+            <li>buoni pasto,</li>
+            <li>assistenza sanitaria,</li>
+            <li>rimborsi spese,</li>
+            <li>servizi per la famiglia.</li>
+          </ul>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Intranet (Rete interna aziendale)</p>
+          <p>Intranet (inglese) = Rete interna aziendale (italiano).</p>
+          <p>L'intranet &egrave; una rete informatica interna all'azienda, accessibile solo ai dipendenti. Contiene informazioni, documenti e strumenti aziendali.</p>
+          <p>&Egrave; come un sito web, ma visibile solo dall'interno.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">People Care (Cura delle persone)</p>
+          <p>People care (inglese) = Cura delle persone (italiano).</p>
+          <p>La funzione &ldquo;People Care&rdquo; di FS S.p.A. &egrave; l'ufficio che si occupa del benessere e dello sviluppo dei dipendenti.</p>
+          <p>La funzione &ldquo;People Care&rdquo; di FS S.p.A.:</p>
+          <ul>
+            <li>definisce gli obiettivi DEI per tutto il Gruppo,</li>
+            <li>monitora che gli obiettivi DEI vengano rispettati.</li>
+          </ul>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Regolamento Europeo sui diritti dei Passeggeri</p>
+          <p>&Egrave; una legge europea che stabilisce i diritti di chi viaggia in treno.</p>
+          <p>La legge europea garantisce:</p>
+          <ul>
+            <li>assistenza per le persone con disabilit&agrave;,</li>
+            <li>rimborsi in caso di ritardo,</li>
+            <li>informazioni chiare sui servizi.</li>
+          </ul>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">NIP &mdash; Piano Nazionale di Attuazione</p>
+          <p>NIP = National Implementation Plan (inglese) = Piano Nazionale di Attuazione (italiano).</p>
+          <p>Il Piano Italiano di Attuazione recepisce le regole europee sull'accessibilit&agrave; dei trasporti ferroviari.</p>
+          <p>Per rendere accessibili a tutti stazioni e treni, il Piano stabilisce quali lavori devono essere fatti.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">TSI e UIC</p>
+          <p>TSI = Technical Specifications for Interoperability (inglese) = Specifiche Tecniche di Interoperabilit&agrave; (italiano). Sono le regole tecniche per garantire che i treni possano circolare in modo sicuro su tutta la rete ferroviaria europea.</p>
+          <p>UIC = Union Internationale des Chemins de fer (francese) = Unione Internazionale delle Ferrovie (italiano). Organizzazione che riunisce gli operatori del settore ferroviario a livello mondiale.</p>
+          <p>TSI e UIC hanno regole anche in materia di accessibilit&agrave;.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Bilanciamento di genere</p>
+          <p>Il bilanciamento di genere significa avere un numero equilibrato di uomini e donne nel gruppo di lavoro.</p>
+          <p>Un gruppo bilanciato &egrave; pi&ugrave; vario e produce risultati migliori.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Certificazione di parit&agrave; di genere</p>
+          <p>La certificazione di parit&agrave; di genere (UNI/PdR 125:2022) attesta che un'azienda tratta uomini e donne in modo equo in tutte le aree:</p>
+          <ul>
+            <li>stipendi,</li>
+            <li>promozioni,</li>
+            <li>formazione, conciliazione vita-lavoro.</li>
+          </ul>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Bias free (Libero da pregiudizi)</p>
+          <p>Bias free (inglese) = Libero da pregiudizi.</p>
+          <p>Una procedura o un controllo &egrave; &ldquo;libero da pregiudizi&rdquo; quando non favorisce n&eacute; svantaggia nessuno rispetto a caratteristiche come:</p>
+          <ul>
+            <li>genere,</li>
+            <li>et&agrave;,</li>
+            <li>cultura,</li>
+            <li>religione,</li>
+            <li>provenienza.</li>
+          </ul>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">KPI &mdash; Indicatori Chiave delle Prestazioni</p>
+          <p>KPI = Key Performance Indicators (inglese) = Indicatori chiave delle prestazioni (italiano).</p>
+          <p>Misure che permettono di valutare se un obiettivo &egrave; stato raggiunto.</p>
+          <p class="glossario-esempio">Esempio: &ldquo;Percentuale di donne in posizioni di comando&rdquo;.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">CSR &mdash; Responsabilit&agrave; Sociale d'Impresa</p>
+          <p>CSR = Corporate Social Responsibility (inglese) = Responsabilit&agrave; Sociale d'Impresa (italiano).</p>
+          <p>L'impegno di un'azienda a comportarsi in modo etico, sostenibile e responsabile nei confronti di:</p>
+          <ul>
+            <li>societ&agrave;,</li>
+            <li>ambiente,</li>
+            <li>persone che lavorano in azienda.</li>
+          </ul>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Role Model (Modello di comportamento)</p>
+          <p>Role Model (inglese) = Modello di comportamento (italiano).</p>
+          <p>Con modello di comportamento si intende un modo di agire positivo ed equo, che altri possono seguire.</p>
+          <p>Un'azienda accessibile, equa e inclusiva diventa un esempio per la societ&agrave;.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">D.Lgs. 231/2001 (Modello 231)</p>
+          <p>Decreto Legislativo che regola la responsabilit&agrave; delle aziende per reati commessi dai propri dipendenti o manager.</p>
+          <p>Le aziende che adottano un &ldquo;Modello 231&rdquo; (piano di prevenzione dei reati) possono essere esonerate dalla responsabilit&agrave; dei reati commessi dai dipendenti.</p>
+          <p>Il documento fa riferimento a questo decreto perch&eacute; le violazioni dei principi DEI possono costituire reati.</p>
+          <p class="glossario-esempio">Esempio: se un dirigente commette un atto discriminatorio grave, l'azienda potrebbe essere ritenuta responsabile se non aveva un Modello di prevenzione adeguato.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Organismo di Vigilanza (OdV)</p>
+          <p>Organo interno all'azienda previsto dalla normativa.</p>
+          <p>L'Organismo ha il compito di:</p>
+          <ul>
+            <li>vigilare sul rispetto del &ldquo;Modello 231&rdquo;,</li>
+            <li>raccogliere le segnalazioni di violazioni.</li>
+          </ul>
+          <p>All'Organismo devono essere segnalate eventuali violazioni dei principi DEI.</p>
+          <p class="glossario-esempio">Esempio: se un dipendente subisce discriminazione sul lavoro e vuole segnalarla in modo formale, pu&ograve; rivolgersi all'Organismo di Vigilanza della propria Societ&agrave;.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">Materiale rotabile</p>
+          <p>Termine ferroviario che indica tutti i veicoli che circolano su rotaia:</p>
+          <ul>
+            <li>treni,</li>
+            <li>locomotori,</li>
+            <li>vagoni passeggeri,</li>
+            <li>carrozze,</li>
+            <li>treni ad alta velocit&agrave;.</li>
+          </ul>
+          <p>Nei principi DEI del Gruppo FS si usa quando si parla di accessibilit&agrave; dei treni: sedili, porte, spazi per sedie a rotelle.</p>
+          <p class="glossario-esempio">Esempio: il materiale rotabile accessibile include spazi per sedie a rotelle, porte automatiche allargate, annunci audio e visivi a bordo.</p>
+        </div>
+
+        <div class="glossario-item">
+          <p class="glossario-termine">PNRR &mdash; Piano Nazionale di Ripresa e Resilienza</p>
+          <p>Il piano di investimenti dell'Italia &egrave; finanziato con i fondi europei del programma Next Generation EU.</p>
+          <p>Include misure specifiche per la parit&agrave; di genere e l'inclusione lavorativa delle persone con disabilit&agrave;, che si applicano agli appalti pubblici finanziati con questi fondi.</p>
+          <p class="glossario-esempio">Esempio: un appalto ferroviario finanziato dal PNRR deve rispettare i requisiti di parit&agrave; di genere previsti dall'art. 47 del D.L. 77/2021.</p>
         </div>
 
       </section>
@@ -1108,10 +1406,16 @@ section > h3 { margin-top: 2rem; }
     tt.addEventListener('mouseenter', function() { clearTimeout(hideTimer); });
     tt.addEventListener('mouseleave', function() { nascondiTT(null); });
     function posiziona(e) {
-      var tw=tt.offsetWidth||360, th=tt.offsetHeight||100;
-      var top=e.clientY-th-18, left=e.clientX+16;
-      if (left+tw > window.innerWidth-12) left=e.clientX-tw-16;
-      if (top<8) top=e.clientY+24;
+      var tw=tt.offsetWidth||320, th=tt.offsetHeight||100;
+      var top=e.clientY-th-18, left=e.clientX+14;
+      if (left+tw > window.innerWidth-12) left=e.clientX-tw-14;
+      if (top<8) top=e.clientY+22;
+      /* Clamp finale — su smartphone il tooltip non deve mai fuoriuscire dal
+         bordo sinistro (o destro) della viewport, indipendentemente dal valore
+         di clientX. Risolve il problema dei tooltip parzialmente nascosti
+         su schermi stretti (320–375 px). */
+      left = Math.max(12, Math.min(left, window.innerWidth  - tw - 12));
+      top  = Math.max(8,  Math.min(top,  window.innerHeight - th - 12));
       tt.style.left=left+'px'; tt.style.top=top+'px';
     }
 
@@ -1134,7 +1438,7 @@ section > h3 { margin-top: 2rem; }
             link.setAttribute('aria-current','true');
           }
         });
-      }, { rootMargin: '0px 0px -65% 0px', threshold: 0 });
+      }, { rootMargin: '0px 0px -60% 0px', threshold: 0 });
       Object.keys(navMap).forEach(function(id) {
         var s = document.getElementById(id);
         if (s) observer.observe(s);
